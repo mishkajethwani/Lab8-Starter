@@ -34,7 +34,7 @@ async function init() {
  */
 function initializeServiceWorker() {
   if ('serviceWorker' in navigator) {
-     window.addEventListener('load', async () => {
+     window.addEventListener('load', async() => {
       try {
         const registration = await navigator.serviceWorker.register('./sw.js');
         if (registration.installing) {
