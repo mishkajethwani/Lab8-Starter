@@ -36,7 +36,7 @@ function initializeServiceWorker() {
   if ('serviceWorker' in navigator) {
      window.addEventListener('load', async () => {
       try {
-        const registration = await navigator.serviceWorker.register('/sw.js');
+        const registration = await navigator.serviceWorker.register('./sw.js');
         if (registration.installing) {
           console.log("Service worker installing");
         } else if (registration.waiting) {
@@ -103,10 +103,13 @@ async function getRecipes() {
   // A9. TODO - Check to see if you have finished retrieving all of the recipes,
   //            if you have, then save the recipes to storage using the function
   //            we have provided. 
-  let serialize_recipes = JSON.stringify(recipes_array);
-  localStorage.setItem('recipes', serialize_recipes);
-  // Then, pass the recipes array to the Promise's resolve() method.
-  resolve(recipes_array);
+    if(recipes_array.length == RECIPE_URLS){
+      // let serialize_recipes = JSON.stringify(recipes_array);
+      // localStorage.setItem('recipes', serialize_recipes);
+      saveRecipesToStorage(recipes);
+    // Then, pass the recipes array to the Promise's resolve() method.
+      resolve(recipes_array);
+    }
   }
   // A10. TODO - Log any errors from catch using console.error
   catch (error){
