@@ -46,10 +46,10 @@ self.addEventListener('fetch', function (event) {
   //            network response.
   event.respondWith(caches.open(CACHE_NAME).then((cache) => {
     // Respond with the image from the cache or from the network
-    return cache.match(event.request).then((cachedResponse) => {
+    return cache.match(event.request.url).then((cachedResponse) => {
       return cachedResponse || fetch(event.request).then((fetchedResponse) => {
         // Add the network response to the cache for future visits.
-        cache.put(event.request, fetchedResponse.clone());
+        cache.put(event.request.url, fetchedResponse.clone());
         // Return the network response
         return fetchedResponse;
       });
