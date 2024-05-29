@@ -36,7 +36,7 @@ function initializeServiceWorker() {
   if ('serviceWorker' in navigator) {
      window.addEventListener('load', async () => {
       try {
-        const registration = await navigator.serviceWorker.register("/sw.js");
+        const registration = await navigator.serviceWorker.register("Lab8-Starter/sw.js");
         if (registration.installing) {
           console.log("Service worker installing");
         } else if (registration.waiting) {
