@@ -64,10 +64,10 @@ async function getRecipes() {
   // EXPOSE - START (All expose numbers start with A)
   // A1. TODO - Check local storage to see if there are any recipes.
   //            If there are recipes, return them.
-  /**************************/
-  const recipes = localStorage.getItem('recipes');
+  /**************************/ 
+  const recipes = JSON.parse(localStorage.getItem('recipes'));
   if(recipes){
-  return JSON.parse(recipes);
+    return recipes;
   }
   // The rest of this method will be concerned with requesting the recipes
   // from the network
@@ -91,19 +91,19 @@ async function getRecipes() {
   //            article on fetch(). NOTE: Fetches are ASYNCHRONOUS, meaning that
   //            you must either use "await fetch(...)" or "fetch.then(...)". This
   //            function is using the async keyword so we recommend "await"
-  let fetched = await fetch(url);
+  const fetched = await fetch(url);
 
   // A7. TODO - For each fetch response, retrieve the JSON from it using .json().
   //            NOTE: .json() is ALSO asynchronous, so you will need to use
   //            "await" again
-  let final_recipe = await fetched.json();
+  const final_recipe = await fetched.json();
 
   // A8. TODO - Add the new recipe to the recipes array
   recipes_array.push(final_recipe);
   // A9. TODO - Check to see if you have finished retrieving all of the recipes,
   //            if you have, then save the recipes to storage using the function
   //            we have provided. 
-    if(recipes_array.length == RECIPE_URLS){
+    if(recipes_array.length == RECIPE_URLS.length){
       // let serialize_recipes = JSON.stringify(recipes_array);
       // localStorage.setItem('recipes', serialize_recipes);
       saveRecipesToStorage(recipes);
